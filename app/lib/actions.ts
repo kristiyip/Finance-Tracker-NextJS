@@ -3,6 +3,7 @@
 import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import { v4 as uuidv4 } from 'uuid';
+import { revalidatePath } from 'next/cache';
 
 const TransactionSchema = z.object({
   id: z.string(),
@@ -51,7 +52,9 @@ export async function createTransaction(prevState: State, formData: FormData) {
     await sql`
       INSERT INTO transactions (id, title, amount, description, date)
       VALUES (${uuidv4()}, ${title}, ${amountInCents}, ${description}, ${date})
-    `
+    `;
+
+    revalidatePath('/dashboard/transactions')
   } catch(err) {
     return {
       message: 'Database Error: Failed to create transaction',
