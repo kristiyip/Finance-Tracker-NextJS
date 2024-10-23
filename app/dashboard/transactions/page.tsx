@@ -1,4 +1,5 @@
 import CreateTransactionForm from "@/app/ui/transactions/create-form"
+import Transactions from "@/app/ui/transactions/transactions"
 
 export default function Page() {
   return (
@@ -6,7 +7,9 @@ export default function Page() {
       <div>
         <CreateTransactionForm />
       </div>
-      List of transactions
+      <div>
+        <Transactions />
+      </div>
     </div>
   )
 }

@@ -2,6 +2,7 @@
 
 import { z } from 'zod';
 import { sql } from '@vercel/postgres';
+import { v4 as uuidv4 } from 'uuid';
 
 const TransactionSchema = z.object({
   id: z.string(),
@@ -48,8 +49,8 @@ export async function createTransaction(prevState: State, formData: FormData) {
 
   try {
     await sql`
-      INSERT INTO transactions (title, amount, description, date)
-      VALUES (${title}, ${amountInCents}, ${description}, ${date})
+      INSERT INTO transactions (id, title, amount, description, date)
+      VALUES (${uuidv4()}, ${title}, ${amountInCents}, ${description}, ${date})
     `
   } catch(err) {
     return {
