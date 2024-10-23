@@ -29,13 +29,11 @@ export type State = {
 }
 
 export async function createTransaction(prevState: State, formData: FormData) {
-  console.log(formData)
   const validateFields = CreateTransaction.safeParse({
     title: formData.get('title'),
     amount: formData.get('amount'),
     description: formData.get('description')
   })
-  console.log(validateFields)
 
   if(!validateFields.success) {
     return {
@@ -45,7 +43,6 @@ export async function createTransaction(prevState: State, formData: FormData) {
   }
 
   const { title, amount, description } = validateFields.data;
-  console.log(title,amount,description)
   const amountInCents = amount * 100
   const date = new Date().toISOString().split('T')[0]
 
