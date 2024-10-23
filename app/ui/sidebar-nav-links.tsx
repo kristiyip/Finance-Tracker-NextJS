@@ -18,6 +18,7 @@ export default function SideBarNavLinks() {
     <>
       {links.map((link, i) => (
         <Link
+          className="hover:bg-blue-500"
           key={link.name}
           href={link.href}
         >
