@@ -6,7 +6,9 @@ export default function Layout({children}: { children: React.ReactNode }) {
       <div className="min-w-60">
         <SideBar />
       </div>
-      <div>{children}</div>
+      <div className="w-full">
+        {children}
+      </div>
     </div>
   )
 }

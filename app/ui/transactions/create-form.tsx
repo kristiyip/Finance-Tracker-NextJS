@@ -14,7 +14,7 @@ export default function CreateTransactionForm() {
 
   return (
     <form action={formAction}>
-      <div>
+      <div className="flex">
         <div>
           <label>Title</label>
           <input 
