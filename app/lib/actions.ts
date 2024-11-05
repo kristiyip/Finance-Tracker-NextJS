@@ -16,7 +16,7 @@ const TransactionSchema = z.object({
   description: z.string({
     invalid_type_error: 'Please type in a description'
   }),
-  date: z.string()
+  date: z.date()
 })
 
 const CreateTransaction = TransactionSchema.omit({ id: true, date: true })
@@ -46,12 +46,12 @@ export async function createTransaction(prevState: State, formData: FormData) {
 
   const { title, amount, description } = validateFields.data;
   const amountInCents = amount * 100
-  const date = new Date().toISOString().split('T')[0]
+  const date = new Date()
 
   try {
     await sql`
-      INSERT INTO transactions (id, title, amount, description, date)
-      VALUES (${uuidv4()}, ${title}, ${amountInCents}, ${description}, ${date})
+      INSERT INTO transactions (title, amount, date, description)
+      VALUES (${title}, ${amountInCents}, ${date}, ${description})
     `;
 
     revalidatePath('/dashboard/transactions')
