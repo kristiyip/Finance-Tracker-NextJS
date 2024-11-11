@@ -1,4 +1,4 @@
-import CreateTransactionForm from "@/app/ui/transactions/create-form"
+import CreateTransactionForm from "@/app/ui/transactions/create-transaction-form"
 import Transactions from "@/app/ui/transactions/transactions"
 
 export default function Page() {
